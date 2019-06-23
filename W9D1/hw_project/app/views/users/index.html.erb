@@ -1,0 +1,12 @@
+<h1> Users </h1>
+<h3>\t Name           Email </h3>
+<ul>
+
+<%@users.each do |user| %>
+ <li>
+  <%=user.name%>
+  <%=user.email%>
+ </li>
+    
+<%end%>
+</ul>
