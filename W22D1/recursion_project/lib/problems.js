@@ -180,22 +180,22 @@ function fileFinder(directories, targetFile) {
 //
 // Example using the same desktop from previously:
 //
-// pathFinder(desktop, 'trixie_lou.jpeg'));     // => '/images/pets/trixie_lou.jpeg'
+console.log(pathFinder(desktop, "trixie_lou.jpeg")); // => '/images/pets/trixie_lou.jpeg'
 // pathFinder(desktop, 'everlong.flac'));       // => '/music/genres/rock/everlong.flac'
 // pathFinder(desktop, 'honeybadger.png'));     // => null
 function pathFinder(directories, targetFile) {
-  let ans = false;
+  let filepath = "";
   let key = Object.keys(directories);
   for (let i = 0; i < key.length; i++) {
-    if (key[i] === targetFile) {
-      ans = true;
-      filepath = `${key[i]}`
+    if (key[i][0] !== "/") {
+      filepath = `/${key[i]}`;
+    } else {
+      filepath = filepath + pathFinder(directories[key[i]], targetFile);
+      console.log(filepath);
+      if (filepath.includes(targetFile)) return filepath;
+      filepath = "";
     }
-    if (key[i][0] === "/")
-      ans = ans || fileFinder(directories[key[i]], targetFile);
   }
-  return ans;
-
 }
 
 module.exports = {
